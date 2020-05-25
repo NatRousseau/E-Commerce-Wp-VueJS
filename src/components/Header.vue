@@ -7,12 +7,12 @@
             <div v-if="open">
                 <div class="menu">
                     <div class="menu-column">
-                        <router-link class="is-tab nav-item" to="/coucou">Catégories</router-link>
+                        <router-link class="is-tab nav-item" to="/boutique">Boutique</router-link>
                         <hr>
-                        <router-link class="is-tab nav-item" to="/l-entreprise">Compte</router-link>
+                        <router-link class="is-tab nav-item" to="/compte">Compte</router-link>
                         <hr>
-                        <router-link class="is-tab nav-item" to="/nos-atouts">Recherche</router-link>
-                        <hr>
+<!--                        <router-link class="is-tab nav-item" to="/nos-atouts">Recherche</router-link>-->
+<!--                        <hr>-->
                     </div>
                 </div>
             </div>
@@ -25,11 +25,11 @@
                 </router-link>
             </div>
             <div class="icon d-flex flex-row">
-                <router-link to="/" class="logo_bag">
+                <router-link to="/panier" class="logo_bag">
                     <img src="../assets/business.png" id="shopping_bag"
                          alt="icone panier"/>
                 </router-link>
-                <router-link to="/" class="logo_user">
+                <router-link to="/compte" class="logo_user">
                     <img src="../assets/social.png" id="user"
                          alt="icone profil"/>
                 </router-link>
@@ -75,7 +75,7 @@
 <style scoped>
 
     .header {
-        /*background-color: #2c3e50;*/
+        background-color: #ffffff;
         position: fixed;
         top: 0;
         height: 10vh;

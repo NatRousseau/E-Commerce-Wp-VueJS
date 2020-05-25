@@ -1,5 +1,5 @@
 {
-  "name": "vue-free-demo",
+  "name": "swarovski",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@jeremyhamm/vue-slider": "^0.2.0",
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "axios": "^0.19.2",
+    "axios-oauth-client": "^1.3.0",
+    "axios-token-interceptor": "^0.2.0",
     "core-js": "^3.6.4",
     "mdbvue": "6.5.1",
     "vue": "^2.6.11",
