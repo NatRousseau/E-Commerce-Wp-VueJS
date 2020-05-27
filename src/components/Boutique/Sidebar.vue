@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div v-for="categorie in categories" :key="categorie.id" class="d-flex flex-row">
             <div class="media-content d-flex flex-column">
-                <h3 class="categorie_title" @click="$emit('get-id', categorie.id)" >{{categorie.name}} ({{categorie.count}})</h3>
+                <a class="categorie_title" @click="$emit('get-id', categorie.id)" >{{categorie.name}} ({{categorie.count}})</a>
             </div>
 
         </div>
@@ -23,7 +23,6 @@
                 .then(response => {
                     for (let categorie in response.data) {
                         this.categories.push(response.data[categorie]);
-                        console.log(response)
                     }
                 })
                 .catch((error) => {
@@ -35,10 +34,15 @@
 
 <style scoped>
 
-    .categorie_title {
+    .categorie_title a {
         padding-left: 20px;
         font-family: Spartan;
         font-weight: 400;
+        color: #000000;
+    }
+
+    a:hover {
+        color: #b7b7b7 !important;
     }
 
 </style>

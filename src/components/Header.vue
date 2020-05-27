@@ -96,9 +96,6 @@
         margin-top: 2%;
     }
 
-    a.button-devis:hover {
-        color: #191919 !important;
-    }
 
     a {
         color: #ffffff !important;

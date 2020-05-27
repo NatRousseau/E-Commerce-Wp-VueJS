@@ -5,6 +5,7 @@ import Main from "../components/Main";
 import Boutique from "../components/Boutique/Boutique";
 import Cart from "../components/Cart";
 import Account from "../components/Account";
+import SingleProduct from "../components/Boutique/SingleProduct";
 
 Vue.use(Router);
 
@@ -24,6 +25,10 @@ export default new Router({
             component: Boutique
         },
         {
+            path: '/boutique/:id',
+            component: SingleProduct
+        },
+        {
             path: '/panier',
             component: Cart
         },
@@ -31,5 +36,8 @@ export default new Router({
             path: '/compte',
             component: Account
         },
-    ]
+    ],
+    scrollBehavior () {
+        return {x: 0, y: 0}
+    }
 });
