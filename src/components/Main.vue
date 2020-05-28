@@ -9,9 +9,19 @@
             <div class="square_2x2">
                 <h3 class="square_txt">Stylo exclusif trop beau</h3>
             </div>
-            <div v-for="popular in populars" :key="popular.id" class="d-flex flex-row">
+            <!--            <div v-for="popular in populars" :key="popular.id" class="d-flex flex-row">-->
+            <!--                <div class="media-content d-flex flex-column">-->
+            <!--                    <img class="popular_img" :src="popular.images[0].src">-->
+            <!--                    <h3 class="popular_title">{{popular.name}}</h3>-->
+            <!--                    <span class="popular_price">{{popular.price}} €</span>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div v-for="popular in populars" :key="popular.id" class="d-flex flex-column search">
                 <div class="media-content d-flex flex-column">
-                    <img class="popular_img" :src="popular.images[0].src">
+                    <div class="popular_img">
+                        <router-link class="is-tab nav-item job_title " :to="'/boutique/' + popular.id"><img
+                                :src="popular.images[0].src"></router-link>
+                    </div>
                     <h3 class="popular_title">{{popular.name}}</h3>
                     <span class="popular_price">{{popular.price}} €</span>
                 </div>
@@ -35,12 +45,11 @@
                 populars: []
             }
         },
-        created: function () {
+        mounted: function () {
             this.$woocommerce.get("products?featured=true")
                 .then(response => {
                     for (let popular in response.data) {
                         this.populars.push(response.data[popular]);
-                        console.log(response)
                     }
                 })
                 .catch((error) => {
@@ -104,6 +113,10 @@
     }
 
     .popular_img {
+        width: 100%;
+    }
+
+    .popular_img img{
         width: 100%;
     }
 
