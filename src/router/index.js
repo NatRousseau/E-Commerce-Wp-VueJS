@@ -3,7 +3,7 @@ import App from "../App";
 import Router from 'vue-router';
 import Main from "../components/Main";
 import Boutique from "../components/Boutique/Boutique";
-import Cart from "../components/Cart";
+import Cart from "../components/Cart/Cart";
 import Account from "../components/Account";
 import SingleProduct from "../components/Boutique/SingleProduct";
 

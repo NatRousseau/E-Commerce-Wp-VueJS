@@ -161,7 +161,7 @@
 
     .article_select::before {
         content: '>';
-        margin-right: 10px;
+        margin-right: 20px;
     }
 
     .article_select {

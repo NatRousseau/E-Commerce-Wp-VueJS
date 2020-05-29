@@ -13,7 +13,7 @@
         <span class="article_price" v-else>
             <span class="regular_price">{{article.regular_price}} € </span>{{article.sale_price}} €
         </span>
-        <button class="add_cart">AJOUTER AU PANIER</button>
+        <button class="add_cart" @click="sentArticleToCart">AJOUTER AU PANIER</button>
         <div class="info_plus d-flex flex-column">
             <p id="dispo">Disponible en ligne</p>
             <p>Retours gratuits</p>
@@ -24,9 +24,23 @@
 </template>
 
 <script>
+
     export default {
         name: "ProductDescription",
         props: ['article', 'materialOptions', 'stoneOptions'],
+        data() {
+            return {
+                addCart: '',
+            }
+        },
+        methods: {
+            sentArticleToCart() {
+                this.addCart = this.article.id
+                console.log(this.addCart);
+                this.$store.commit('addToCartList', this.addCart)
+
+            }
+        }
     }
 </script>
 
