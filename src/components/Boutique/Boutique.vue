@@ -5,25 +5,29 @@
         </div>
         <div class="boutique d-flex">
             <div class="sidebar_container d-flex flex-column">
-                <p>COMMADER PAR CATEGORIES</p>
+                <p>PARCOURIR LES CATEGORIES</p>
                 <a class="categorie_title" @click="getPopular">Les plus populaires</a>
                 <Sidebar @get-id="selectionCategorie"></Sidebar>
             </div>
             <div class="container_article">
                 <div class="d-flex justify-content-center loader visibility-hidden" v-if="loader">
-                    <div class="spinner-grow" role="status">
+                    <div class="spinner-border" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
                 <div class="grid_container">
                     <div v-for="popular in populars" :key="popular.id" class="d-flex flex-column search">
                         <div class="media-content d-flex flex-column">
-                            <div class="article_img">
-                                <router-link class="is-tab nav-item job_title " :to="'/boutique/' + popular.id"><img
-                                        :src="popular.images[0].src"></router-link>
-                            </div>
+                            <router-link class="is-tab nav-item article_link " :to="'/boutique/' + popular.id">
+                                <div class="article_img"
+                                     v-bind:style="{ backgroundImage: 'url(' + popular.images[0].src + ')' }"></div>
+                            </router-link>
                             <h3 class="article_title">{{popular.name}}</h3>
-                            <span class="article_price">{{popular.price}} €</span>
+                            <span class="article_price"
+                                  v-if="popular.sale_price === ''">{{popular.regular_price}} €</span>
+                            <span class="article_price" v-else>
+                                <span class="regular_price">{{popular.regular_price}} € </span>{{popular.sale_price}} €
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -169,6 +173,9 @@
     }
 
     .article_img {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
         width: 404px;
         height: 360px;
         background-color: #FAFAFA;
@@ -191,6 +198,12 @@
         font-family: 'Spartan';
         font-size: 20px;
         text-align: left;
+    }
+
+    .regular_price {
+        text-decoration: line-through;
+        color: #707070;
+        margin-right: 10px;
     }
 
 </style>

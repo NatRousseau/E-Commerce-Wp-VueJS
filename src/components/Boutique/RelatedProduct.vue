@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div v-for="product in products" :key="product.id" class="d-flex flex-column search">
-            <div class="media-content d-flex flex-column">
-                <div class="article_img">
-                    <router-link class="is-tab nav-item job_title " :to="'/boutique/' + product.id">
-                        <img :src="product.images[0].src">
-                    </router-link>
+        <div class="related_product">
+            <div v-for="related in relateds" :key="related.id" class="d-flex flex-column search">
+                <div class="media-content d-flex flex-column">
+                    <div class="related_img" v-bind:style="{ backgroundImage: 'url(' + related.images[0].src + ')' }"
+                         @click="$emit('get-id', related.id)">
+                    </div>
+                    <h3 class="related_title">{{related.name}}</h3>
+                    <span class="related_price">{{related.price}} €</span>
                 </div>
-                <h3 class="article_title">{{product.name}}</h3>
-                <span class="article_price">{{product.price}} €</span>
             </div>
         </div>
     </div>
@@ -18,52 +18,46 @@
 
     export default {
         name: "RelatedProduct",
-        props: ['relatedid'],
-        data() {
-            return {
-                relateds: this.relatedid,
-                products: [],
-                loader: false
-            }
-        },
-        mounted: function () {
-            this.relateds.forEach(id => {
-            this.$woocommerce.get("products/" + id)
-                .then(response => {
-                    this.products = [...this.products, response.data];
-                })
-                .catch((error) => {
-                    console.log(error.response.data);
-                });
-            })
-        }
+        props: ['relateds'],
     }
 </script>
 
 <style scoped>
 
-    .loader {
-        margin-top: 320px;
-        width: 480px;
-        margin-right: auto;
-        margin-left: auto;
-        margin-bottom: 360px;
-        z-index: 1000;
+    .related_product {
+        margin: 50px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: auto;
+        grid-column-gap: 20px;
     }
 
-    .article_img_galerie {
-        margin-left: 200px;
-        margin-right: 50px;
+    .related_img {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+        width: 300px;
+        height: 340px;
+        background-color: #FAFAFA;
     }
 
-    .article_img_galerie_single {
-        width: 100px;
-        margin-bottom: 30px;
-        border: 1px solid #707070;
-    }
-
-    article_img_galerie_single img {
+    .related_img img {
         width: 100%;
+    }
+
+    .related_title {
+        margin-top: 10px;
+        font-family: 'Spartan';
+        font-weight: bold;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .related_price {
+        font-family: 'Spartan';
+        font-size: 18px;
+        text-align: left;
     }
 
 </style>

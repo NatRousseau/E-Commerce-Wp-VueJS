@@ -9,21 +9,19 @@
             <div class="square_2x2">
                 <h3 class="square_txt">Stylo exclusif trop beau</h3>
             </div>
-            <!--            <div v-for="popular in populars" :key="popular.id" class="d-flex flex-row">-->
-            <!--                <div class="media-content d-flex flex-column">-->
-            <!--                    <img class="popular_img" :src="popular.images[0].src">-->
-            <!--                    <h3 class="popular_title">{{popular.name}}</h3>-->
-            <!--                    <span class="popular_price">{{popular.price}} €</span>-->
-            <!--                </div>-->
-            <!--            </div>-->
             <div v-for="popular in populars" :key="popular.id" class="d-flex flex-column search">
                 <div class="media-content d-flex flex-column">
                     <div class="popular_img">
-                        <router-link class="is-tab nav-item job_title " :to="'/boutique/' + popular.id"><img
-                                :src="popular.images[0].src"></router-link>
+                        <router-link class="is-tab nav-item job_title " :to="'/boutique/' + popular.id">
+                            <img :src="popular.images[0].src">
+                        </router-link>
                     </div>
                     <h3 class="popular_title">{{popular.name}}</h3>
-                    <span class="popular_price">{{popular.price}} €</span>
+                    <span class="popular_price"
+                          v-if="popular.sale_price === ''">{{popular.regular_price}} €</span>
+                    <span class="popular_price" v-else>
+                                <span class="regular_price">{{popular.regular_price}} € </span>{{popular.sale_price}} €
+                            </span>
                 </div>
             </div>
         </div>
@@ -116,7 +114,7 @@
         width: 100%;
     }
 
-    .popular_img img{
+    .popular_img img {
         width: 100%;
     }
 
@@ -125,6 +123,12 @@
         font-weight: bold;
         font-size: 20px;
         text-align: left;
+    }
+
+    .regular_price {
+        text-decoration: line-through;
+        color: #707070;
+        margin-right: 10px;
     }
 
     .popular_price {

@@ -2,7 +2,8 @@
     <div class="sidebar">
         <div v-for="categorie in categories" :key="categorie.id" class="d-flex flex-row">
             <div class="media-content d-flex flex-column">
-                <a class="categorie_title" @click="$emit('get-id', categorie.id)" >{{categorie.name}} ({{categorie.count}})</a>
+                <a class="categorie_title" @click="$emit('get-id', categorie.id)">{{categorie.name}}
+                    ({{categorie.count}})</a>
             </div>
 
         </div>
