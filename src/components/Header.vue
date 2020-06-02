@@ -28,7 +28,9 @@
                 <router-link to="/panier" class="logo_bag">
                     <img src="../assets/business.png" id="shopping_bag"
                          alt="icone panier"/>
+
                 </router-link>
+                <span class="count_cart">{{cartNb}}</span>
                 <router-link to="/compte" class="logo_user">
                     <img src="../assets/social.png" id="user"
                          alt="icone profil"/>
@@ -64,10 +66,15 @@
                 this.open = !this.open
             },
         },
+        computed: {
+          cartNb (){
+              return this.$store.getters.listToCart.length
+          }
+        },
         watch: {
             $route() {
                 this.open = false
-            }
+            },
         }
     }
 </script>
@@ -181,6 +188,18 @@
     li {
         display: inline-block;
         margin: 0 10px;
+    }
+
+    .count_cart{
+        position: relative;
+        border: 1px solid #000000;
+        border-radius: 100%;
+        padding: 1px 5px;
+        height: fit-content;
+        font-size: 10px;
+        top: 20px;
+        left: -25px;
+        background-color: #ffffff;
     }
 
     @media (min-width: 576px) {
