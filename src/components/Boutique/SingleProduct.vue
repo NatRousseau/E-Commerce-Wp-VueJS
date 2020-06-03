@@ -15,7 +15,8 @@
                 <div class="article_img" v-bind:style="{ backgroundImage: 'url(' + image + ')' }">
                 </div>
                 <ProductDescription :article="article" :materialOptions="materialOptions"
-                                    :stoneOptions="stoneOptions"></ProductDescription>
+                                    :stoneOptions="stoneOptions">
+                </ProductDescription>
             </div>
             <div class="info_description d-flex flex-row">
                 <AccordionInfo :article="article" :materialOptions="materialOptions" :stoneOptions="stoneOptions"
@@ -121,6 +122,11 @@
                     stone.forEach(pierre => {
                         this.stoneOptions.push(pierre);
                     })
+                    response.data.meta_data[0].value = 0
+                    let test = response.data.meta_data[0].value
+                    test += 1
+                    test -=1
+                    response.data.meta_data[0].value = test
                     this.relatedid = response.data.related_ids
                     this.relatedid.forEach(id => {
                         this.$woocommerce.get("products/" + id)

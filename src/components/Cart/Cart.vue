@@ -44,9 +44,9 @@
                     </div>
                     <div class="cart_option d-flex">
                         <div class="quantity">
-                            <button class="lessButton" @click="cartArticle.qty -= 1">-</button>
-                            <span class="count">{{cartArticle.qty}}</span>
-                            <button class="moreButton" @click="cartArticle.qty += 1">+</button>
+                            <button class="lessButton" @click="cartArticle.meta_data[0].value -= 1">-</button>
+                            <span class="count">{{cartArticle.meta_data[0].value}}</span>
+                            <button class="moreButton" @click="cartArticle.meta_data[0].value += 1">+</button>
                         </div>
                         <div>
                             <button class="delete" @click="deleteArticle(cartArticle)">
@@ -78,55 +78,18 @@
         },
 
         methods: {
-            deleteArticle(cartArticle){
+            deleteArticle(cartArticle) {
                 // this.cartArticles.splice(this.cartArticles.indexOf(cartArticle), 1)
                 this.$store.commit('removeToCartList', cartArticle)
+                // this.cart = this.$store.getters.quantityCart
                 // console.log(cartArticle);
                 // console.log(this.cartArticles.indexOf(cartArticle))
             },
         },
         mounted() {
             this.loader = true;
-            this.cart = this.$store.getters.listToCart
-            if (this.cart.length !== 0) {
-                let sorted_arr = this.cart.slice().sort();
-                var dico = new Map();
-                for (let i = 0;
-                     i < sorted_arr.length;
-                     i++
-                ) {
-                    if (dico.has(sorted_arr [i])) {
-                        var newQte = dico.get(sorted_arr[i]);
-                        newQte += 1;
-                        dico.set(sorted_arr[i], newQte);
-                    } else {
-                        dico.set(sorted_arr[i], 1);
-                    }
-                }
-                this.dico = dico
-                let sansDouble = []
-                let sorted_tab = this.cart.slice().sort();
-                for (let i = 0; i < sorted_tab.length; i++) {
-                    if (sorted_tab[i + 1] !== sorted_tab[i]) {
-                        sansDouble.push(sorted_tab[i]);
-                    }
-                }
-                sansDouble.forEach(article => {
-                    this.$woocommerce.get("products/" + article)
-                        .then(response => {
-                            let articleResponse = response.data
-                            articleResponse["qty"] = this.dico.get(article)
-                            this.cartArticles.push(articleResponse)
-                        })
-                    this.loader = false;
-                }, error => {
-                    alert(error)
-                    this.loader = false;
-                });
-            } else {
-                this.loader = false
-            }
-
+            this.cartArticles = this.$store.getters.listToCart
+            this.loader = false;
         }
         ,
     }
@@ -134,7 +97,7 @@
 
 <style scoped>
 
-    .main{
+    .main {
         margin-top: 150px;
     }
 
@@ -224,7 +187,7 @@
         text-align: left;
     }
 
-    .cart_option{
+    .cart_option {
         width: 100%;
         position: relative;
     }

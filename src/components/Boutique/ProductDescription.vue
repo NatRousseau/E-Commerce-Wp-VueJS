@@ -13,6 +13,11 @@
         <span class="article_price" v-else>
             <span class="regular_price">{{article.regular_price}} € </span>{{article.sale_price}} €
         </span>
+        <div class="quantity">
+            <button class="lessButton" @click="article.meta_data[0].value -= 1">-</button>
+            <span class="count">{{article.meta_data[0].value}}</span>
+            <button class="moreButton" @click="article.meta_data[0].value += 1">+</button>
+        </div>
         <button class="add_cart" @click="sentArticleToCart">AJOUTER AU PANIER</button>
         <div class="info_plus d-flex flex-column">
             <p id="dispo">Disponible en ligne</p>
@@ -35,8 +40,7 @@
         },
         methods: {
             sentArticleToCart() {
-                this.addCart = this.article.id
-                console.log(this.addCart);
+                this.addCart = this.article
                 this.$store.commit('addToCartList', this.addCart)
 
             }
@@ -111,6 +115,42 @@
 
     #dispo {
         font-weight: 700;
+    }
+
+    .quantity {
+        width: fit-content;
+        height: 70px;
+        background-color: #F6F6F6;
+        border: 1px solid #707070;
+        margin: 30px;
+        font-family: 'Spartan';
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .lessButton {
+        border: none;
+        height: 68px;
+        width: 50px;
+        background-color: #F6F6F6;
+        font-family: 'Spartan';
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .count {
+        height: 68px;
+        margin: 0 30px;
+    }
+
+    .moreButton {
+        border: none;
+        height: 68px;
+        width: 50px;
+        background-color: #F6F6F6;
+        font-family: 'Spartan';
+        font-weight: bold;
+        font-size: 20px;
     }
 
 </style>
