@@ -11,8 +11,8 @@
                         <hr>
                         <router-link class="is-tab nav-item" to="/compte">Compte</router-link>
                         <hr>
-<!--                        <router-link class="is-tab nav-item" to="/nos-atouts">Recherche</router-link>-->
-<!--                        <hr>-->
+                        <!--                        <router-link class="is-tab nav-item" to="/nos-atouts">Recherche</router-link>-->
+                        <!--                        <hr>-->
                     </div>
                 </div>
             </div>
@@ -67,9 +67,9 @@
             },
         },
         computed: {
-          cartNb (){
-              return this.$store.getters.listToCart.length
-          }
+            cartNb() {
+                return this.$store.getters.listToCart.length
+            }
         },
         watch: {
             $route() {
@@ -164,11 +164,11 @@
         width: 60%;
     }
 
-    .fa-search{
+    .fa-search {
         color: #212121;
     }
 
-    .menu-button img{
+    .menu-button img {
         width: 40%;
     }
 
@@ -190,7 +190,7 @@
         margin: 0 10px;
     }
 
-    .count_cart{
+    .count_cart {
         position: relative;
         border: 1px solid #000000;
         border-radius: 100%;
@@ -228,12 +228,10 @@
         /*.menu-button {*/
         /*    top: 28px;*/
         /*}*/
-
         /*.menu-column {*/
         /*    margin-top: 30px;*/
         /*    width: 40%;*/
         /*}*/
-
         /*.title-menu {*/
         /*    width: 38vw;*/
         /*}*/
@@ -253,12 +251,10 @@
         /*.menu-column {*/
         /*    width: 20%;*/
         /*}*/
-
         /*.title-menu {*/
         /*    width: 14vw;*/
         /*    margin-left: 3vw;*/
         /*}*/
-
         #vwp-logo {
             width: 13%;
         }
@@ -277,7 +273,6 @@
         /*    width: 14vw;*/
         /*    margin-left: 3vw;*/
         /*}*/
-
         #vwp-logo {
             width: 10%;
         }

@@ -6,6 +6,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/store'
+import VueSimpleAlert from "vue-simple-alert";
 
 Vue.config.productionTip = false;
 
@@ -23,6 +24,7 @@ const WooCommerce = new WooCommerceRestApi({
 Vue.prototype.$woocommerce = WooCommerce
 
 Vue.use(VueResouce);
+Vue.use(VueSimpleAlert);
 Vue.http.options.root = 'https://api.template.nathan-rousseau.fr/wp-json';
 
 new Vue({

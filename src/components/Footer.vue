@@ -31,7 +31,8 @@
                 <router-link class="is-tab nav-item" to="/nous-trouver">Carrières</router-link>
                 <router-link class="is-tab nav-item" to="/nous-trouver">Become a Partner</router-link>
                 <router-link class="is-tab nav-item" to="/nous-trouver">Affiliation</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Pierres fines & précieuses pour professionnels</router-link>
+                <router-link class="is-tab nav-item" to="/nous-trouver">Pierres fines & précieuses pour professionnels
+                </router-link>
                 <router-link class="is-tab nav-item" to="/nous-trouver">Cristaux pour professionnels</router-link>
             </div>
         </div>

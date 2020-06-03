@@ -37,7 +37,7 @@ export default new Router({
             component: Account
         },
     ],
-    scrollBehavior () {
+    scrollBehavior() {
         return {x: 0, y: 0}
     }
 });

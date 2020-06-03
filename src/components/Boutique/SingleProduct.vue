@@ -125,7 +125,7 @@
                     response.data.meta_data[0].value = 0
                     let test = response.data.meta_data[0].value
                     test += 1
-                    test -=1
+                    test -= 1
                     response.data.meta_data[0].value = test
                     this.relatedid = response.data.related_ids
                     this.relatedid.forEach(id => {

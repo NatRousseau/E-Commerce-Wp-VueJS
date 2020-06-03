@@ -42,6 +42,14 @@
             sentArticleToCart() {
                 this.addCart = this.article
                 this.$store.commit('addToCartList', this.addCart)
+                this.$fire({
+                    title: "Title",
+                    text: "text",
+                    type: "success",
+                    timer: 3000
+                }).then(r => {
+                    console.log(r.value);
+                });
 
             }
         }

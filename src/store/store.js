@@ -8,6 +8,7 @@ export default new Vuex.Store({
     plugins: [new VuexPersistence().plugin],
     state: {
         cartList: [],
+        totalList: []
     },
     getters: {
         listToCart: state => {
@@ -15,13 +16,15 @@ export default new Vuex.Store({
         },
     },
 
-    actions: {
-
-    },
+    actions: {},
 
     mutations: {
         addToCartList(state, addCart) {
             state.cartList.push(addCart)
+        },
+
+        addToCalculList(state, addCalcul) {
+            state.totalList.push(addCalcul)
         },
 
 
@@ -40,6 +43,21 @@ export default new Vuex.Store({
             //     state.cartList.slice(removeCart)
             //     console.log(state.cartList)
         },
+
+        // calculSinglePrice(state) {
+        //     this.cartArticles.forEach(price => {
+        //         if (price.sale_price === '') {
+        //             let singleprice = price.regular_price * price.meta_data[0].value
+        //             this.singleTotal.push(singleprice);
+        //             // console.log(singleprice);
+        //         } else {
+        //             let singleprice = price.sale_price * price.meta_data[0].value
+        //             this.singleTotal.push(singleprice);
+        //             // console.log(singleprice);
+        //         }
+        //         console.log(this.singleTotal);
+        //     })
+        // }
 
     },
 

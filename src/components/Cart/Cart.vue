@@ -1,72 +1,83 @@
 <template>
-    <div class="main">
-        <div class="d-flex justify-content-center loader visibility-hidden" v-if="loader">
-            <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <div v-if="this.$store.getters.listToCart.length === 0" class="no_article d-flex flex-column">
-            <span>Votre panier est vide</span>
-            <router-link class="is-tab nav-item article_link " to="/boutique">
-                <button class="voir_plus_button">ALLER A LA BOUTIQUE</button>
-            </router-link>
-        </div>
-
-        <div v-else v-for="cartArticle in cartArticles" :key="cartArticle.id" class="d-flex flex-column cart_item">
-
-            <div class="media-content d-flex flex-row">
-                <div class="cart_img">
-                    <router-link class="is-tab nav-item article_link " :to="'/boutique/' + cartArticles.id">
-                        <div class="article_img"
-                             v-bind:style="{ backgroundImage: 'url(' + cartArticle.images[0].src + ')' }"></div>
-                    </router-link>
+    <div class="main d-flex flex-row">
+        <div class="cart">
+            <div class="d-flex justify-content-center loader visibility-hidden" v-if="loader">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
-                <div class="cart_info d-flex flex-column">
-                    <div class="cart_txt d-flex flex-column">
-                        <h3 class="article_title">{{cartArticle.name}}</h3>
-                        <ul>
-                            <li v-for="materialOption in cartArticle.attributes[0].options" :key="materialOption.id">
-                                {{materialOption}}
-                            </li>
-                            <li v-for="stoneOption in cartArticle.attributes[1].options" :key="stoneOption.id">
-                                {{stoneOption}}
-                            </li>
-                            <li>N° de l'article : {{cartArticle.id}}</li>
-                            <li>Poids de l'article : {{cartArticle.weight}} Kg</li>
-                            <li>Slug de l'article : {{cartArticle.slug}}</li>
-                        </ul>
+            </div>
+            <div v-if="this.$store.getters.listToCart.length === 0" class="no_article d-flex flex-column">
+                <span>Votre panier est vide</span>
+                <router-link class="is-tab nav-item article_link " to="/boutique">
+                    <button class="voir_plus_button">ALLER A LA BOUTIQUE</button>
+                </router-link>
+            </div>
+            <div v-else v-for="cartArticle in cartArticles" :key="cartArticle.id" class="d-flex flex-column cart_item">
+
+                <div class="media-content d-flex flex-row">
+                    <div class="cart_img">
+                        <router-link class="is-tab nav-item article_link " :to="'/boutique/' + cartArticles.id">
+                            <div class="article_img"
+                                 v-bind:style="{ backgroundImage: 'url(' + cartArticle.images[0].src + ')' }"></div>
+                        </router-link>
                     </div>
-                    <div class="cart_price d-flex flex-column">
+                    <div class="cart_info d-flex flex-column">
+                        <div class="cart_txt d-flex flex-column">
+                            <h3 class="article_title">{{cartArticle.name}}</h3>
+                            <ul>
+                                <li v-for="materialOption in cartArticle.attributes[0].options"
+                                    :key="materialOption.id">
+                                    {{materialOption}}
+                                </li>
+                                <li v-for="stoneOption in cartArticle.attributes[1].options" :key="stoneOption.id">
+                                    {{stoneOption}}
+                                </li>
+                                <li>N° de l'article : {{cartArticle.id}}</li>
+                                <li>Poids de l'article : {{cartArticle.weight}} Kg</li>
+                                <li>Slug de l'article : {{cartArticle.slug}}</li>
+                            </ul>
+                        </div>
+                        <div class="cart_price d-flex flex-column">
                         <span class="article_price"
                               v-if="cartArticle.sale_price === ''">{{cartArticle.regular_price}} €</span>
-                        <span class="article_price d-flex flex-column" v-else>
+                            <span class="article_price d-flex flex-column" v-else>
                     <span class="regular_price">{{cartArticle.regular_price}} € </span>{{cartArticle.sale_price}} €</span>
-                    </div>
-                    <div class="cart_option d-flex">
-                        <div class="quantity">
-                            <button class="lessButton" @click="cartArticle.meta_data[0].value -= 1">-</button>
-                            <span class="count">{{cartArticle.meta_data[0].value}}</span>
-                            <button class="moreButton" @click="cartArticle.meta_data[0].value += 1">+</button>
                         </div>
-                        <div>
-                            <button class="delete" @click="deleteArticle(cartArticle)">
-                                <mdb-icon far icon="trash-alt"/>
-                            </button>
+                        <div class="cart_option d-flex">
+                            <div class="quantity">
+                                <button class="lessButton" v-on:click="calculSingleTotal(cartArticles)"
+                                        @click="cartArticle.meta_data[0].value -= 1">-
+                                </button>
+                                <span class="count">{{cartArticle.meta_data[0].value}}</span>
+                                <button class="moreButton" v-on:click="calculSingleTotal(cartArticles)"
+                                        @click="cartArticle.meta_data[0].value += 1">+
+                                </button>
+                            </div>
+                            <div>
+                                <button class="delete" @click="deleteArticle(cartArticle)">
+                                    <mdb-icon far icon="trash-alt"/>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="recap">
+            <CartRecap :cartArticles="cartArticles" :singleTotal="singleTotal"></CartRecap>
         </div>
     </div>
 </template>
 
 <script>
     import {mdbIcon} from 'mdbvue';
+    import CartRecap from "./CartRecap";
 
     export default {
         name: "Cart",
         components: {
-            mdbIcon
+            mdbIcon,
+            CartRecap
         },
         data() {
             return {
@@ -74,6 +85,8 @@
                 cartArticles: [],
                 dico: [],
                 loader: false,
+                singleTotal: [],
+                prix: []
             }
         },
 
@@ -85,13 +98,45 @@
                 // console.log(cartArticle);
                 // console.log(this.cartArticles.indexOf(cartArticle))
             },
+            calculSingleTotal(cartArticle) {
+                this.singleTotal = []
+                cartArticle.forEach(price => {
+                    if (price.sale_price === '') {
+                        let singleprice = price.regular_price * price.meta_data[0].value
+                        this.singleTotal.push(singleprice);
+                        this.$store.commit('addToCalculList', this.singleTotal)
+                        console.log(singleprice);
+                    } else {
+                        let singleprice = price.sale_price * price.meta_data[0].value
+                        this.singleTotal.push(singleprice);
+                        this.$store.commit('addToCalculList', this.singleTotal)
+                        console.log(singleprice);
+                    }
+                    console.log(this.singleTotal);
+                })
+            }
+
         },
         mounted() {
             this.loader = true;
             this.cartArticles = this.$store.getters.listToCart
+            this.singleTotal = this.$store.getters.totalList
+            this.cartArticles.forEach(price => {
+                if (price.sale_price === '') {
+                    let singleprice = price.regular_price * price.meta_data[0].value
+                    // this.singleTotal.push(singleprice);
+                    this.$store.commit('addToCalculList', singleprice)
+                    console.log(singleprice);
+                } else {
+                    let singleprice = price.sale_price * price.meta_data[0].value
+                    // this.singleTotal.push(singleprice);
+                    this.$store.commit('addToCalculList', singleprice)
+                    console.log(singleprice);
+                }
+                console.log(this.singleTotal);
+            })
             this.loader = false;
-        }
-        ,
+        },
     }
 </script>
 
@@ -99,6 +144,17 @@
 
     .main {
         margin-top: 150px;
+    }
+
+    .cart {
+        width: 60%;
+    }
+
+    .recap {
+        width: 30%;
+        background-color: #F6F6F6;
+        margin: 30px;
+        height: fit-content;
     }
 
     .loader {
@@ -127,7 +183,6 @@
     }
 
     .cart_item {
-        width: 60%;
         border-bottom: 1px solid #707070;
         padding-bottom: 30px;
         padding-top: 30px;
