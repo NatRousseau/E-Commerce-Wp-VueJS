@@ -68,7 +68,13 @@
         },
         computed: {
             cartNb() {
-                return this.$store.getters.listToCart.length
+                let list = this.$store.getters.listToCart
+                let singleTotal = [];
+                list.forEach(total => {
+                    singleTotal.push(total.meta_data[0].value)
+                })
+                console.log(singleTotal);
+                return singleTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
             }
         },
         watch: {

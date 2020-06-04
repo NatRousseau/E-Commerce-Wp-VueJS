@@ -8,7 +8,7 @@ export default new Vuex.Store({
     plugins: [new VuexPersistence().plugin],
     state: {
         cartList: [],
-        totalList: []
+        // totalList: []
     },
     getters: {
         listToCart: state => {
@@ -23,9 +23,9 @@ export default new Vuex.Store({
             state.cartList.push(addCart)
         },
 
-        addToCalculList(state, addCalcul) {
-            state.totalList.push(addCalcul)
-        },
+        // addToCalculList(state, addCalcul) {
+        //     state.totalList.push(addCalcul)
+        // },
 
 
         removeToCartList(state, removeCart) {

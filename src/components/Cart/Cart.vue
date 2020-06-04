@@ -45,13 +45,9 @@
                         </div>
                         <div class="cart_option d-flex">
                             <div class="quantity">
-                                <button class="lessButton" v-on:click="calculSingleTotal(cartArticles)"
-                                        @click="cartArticle.meta_data[0].value -= 1">-
-                                </button>
+                                <button class="lessButton" @click="quantityLess(cartArticle)">-</button>
                                 <span class="count">{{cartArticle.meta_data[0].value}}</span>
-                                <button class="moreButton" v-on:click="calculSingleTotal(cartArticles)"
-                                        @click="cartArticle.meta_data[0].value += 1">+
-                                </button>
+                                <button class="moreButton" @click="quantityMore(cartArticle)">+</button>
                             </div>
                             <div>
                                 <button class="delete" @click="deleteArticle(cartArticle)">
@@ -64,7 +60,7 @@
             </div>
         </div>
         <div class="recap">
-            <CartRecap :cartArticles="cartArticles" :singleTotal="singleTotal"></CartRecap>
+            <CartRecap :cartArticles="cartArticles"></CartRecap>
         </div>
     </div>
 </template>
@@ -83,10 +79,8 @@
             return {
                 cart: [],
                 cartArticles: [],
-                dico: [],
                 loader: false,
-                singleTotal: [],
-                prix: []
+                // singleTotal: [],
             }
         },
 
@@ -98,45 +92,50 @@
                 // console.log(cartArticle);
                 // console.log(this.cartArticles.indexOf(cartArticle))
             },
+            quantityLess(cartArticle) {
+                cartArticle.meta_data[0].value -= 1
+                this.calculSingleTotal(this.cartArticles)
+            },
+
+            quantityMore(cartArticle) {
+                cartArticle.meta_data[0].value += 1
+                this.calculSingleTotal(this.cartArticles)
+            },
+
             calculSingleTotal(cartArticle) {
-                this.singleTotal = []
+               // let stock = this.cartArticles
                 cartArticle.forEach(price => {
                     if (price.sale_price === '') {
-                        let singleprice = price.regular_price * price.meta_data[0].value
-                        this.singleTotal.push(singleprice);
-                        this.$store.commit('addToCalculList', this.singleTotal)
-                        console.log(singleprice);
+                        let quantity = price.meta_data[0].value
+                        let singleprice = price.regular_price * quantity
+                        // this.singleTotal.push(singleprice);
+                        // this.$store.commit('addToCalculList', this.singleTotal)
+                        price.meta_data[2].value = singleprice
+                        // console.log(quantity);
+                        // console.log(singleprice);
                     } else {
-                        let singleprice = price.sale_price * price.meta_data[0].value
-                        this.singleTotal.push(singleprice);
-                        this.$store.commit('addToCalculList', this.singleTotal)
-                        console.log(singleprice);
+                        let quantity = price.meta_data[0].value
+                        let singleprice = price.sale_price * quantity
+                        // this.singleTotal.push(singleprice);
+                        // this.$store.commit('addToCalculList', this.singleTotal)
+                        price.meta_data[2].value = singleprice
+                        // console.log(quantity);
+                        // console.log(singleprice);
                     }
-                    console.log(this.singleTotal);
+                    // console.log(this.singleTotal);
                 })
             }
 
         },
         mounted() {
             this.loader = true;
-            this.cartArticles = this.$store.getters.listToCart
-            this.singleTotal = this.$store.getters.totalList
-            this.cartArticles.forEach(price => {
-                if (price.sale_price === '') {
-                    let singleprice = price.regular_price * price.meta_data[0].value
-                    // this.singleTotal.push(singleprice);
-                    this.$store.commit('addToCalculList', singleprice)
-                    console.log(singleprice);
-                } else {
-                    let singleprice = price.sale_price * price.meta_data[0].value
-                    // this.singleTotal.push(singleprice);
-                    this.$store.commit('addToCalculList', singleprice)
-                    console.log(singleprice);
-                }
-                console.log(this.singleTotal);
-            })
+            this.cartArticles = this.$store.getters.listToCart;
+            // this.singleTotal = this.$store.getters.totalList
+            this.calculSingleTotal(this.cartArticles);
             this.loader = false;
         },
+
+
     }
 </script>
 

@@ -9,7 +9,7 @@
                 <li class="recap_price d-flex flex-row">
                     <!--                    <span class="article_price"-->
                     <!--                          v-if="cartArticle.sale_price === ''">{{cartArticle.regular_price * cartArticle.meta_data[0].value}} €</span>-->
-                    <span class="article_price">{{singleTotal}} €</span>
+                    <span class="article_price">{{cartArticle.meta_data[2].value}} €</span>
 
                 </li>
             </ul>
@@ -17,19 +17,33 @@
         <div class="shipping d-flex flex-row">
             <span class="shipping_info">Livraison :</span>
             <span class="shipping_price">GRATUIT</span>
-
         </div>
-        <div class="recap_total">
-
+        <div class="shipping">
+            <span class="shipping_info">TOTAL : </span>
+            <span class="shipping_info">{{totalProduct}} €</span>
         </div>
-        <button class="procced">PROCÉDER À L'ACHAT</button>
+
+        <router-link class="is-tab nav-item" to="/validation"><button class="procced">PROCÉDER À L'ACHAT</button></router-link>
     </div>
 </template>
 
 <script>
     export default {
         name: "CartRecap",
-        props: ['cartArticles', 'singleTotal'],
+        props: ['cartArticles'],
+
+        computed: {
+            totalProduct() {
+                let singleTotal = [];
+                this.cartArticles.forEach(total => {
+                    singleTotal.push(total.meta_data[2].value)
+                })
+                console.log(singleTotal);
+
+                return singleTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+
+            }
+        }
     }
 </script>
 

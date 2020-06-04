@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import Main from "../components/Main";
 import Boutique from "../components/Boutique/Boutique";
 import Cart from "../components/Cart/Cart";
+import Paiement from "../components/Cart/Paiement";
 import Account from "../components/Account";
 import SingleProduct from "../components/Boutique/SingleProduct";
 
@@ -31,6 +32,10 @@ export default new Router({
         {
             path: '/panier',
             component: Cart
+        },
+        {
+            path: '/validation',
+            component: Paiement
         },
         {
             path: '/compte',
