@@ -25,16 +25,22 @@
                 </router-link>
             </div>
             <div class="icon d-flex flex-row">
+                <span class="count_cart">{{cartNb}}</span>
                 <router-link to="/panier" class="logo_bag">
                     <img src="../assets/business.png" id="shopping_bag"
                          alt="icone panier"/>
-
                 </router-link>
-                <span class="count_cart">{{cartNb}}</span>
-                <router-link to="/compte" class="logo_user">
-                    <img src="../assets/social.png" id="user"
-                         alt="icone profil"/>
-                </router-link>
+                <div class="dropdown">
+                    <div class="logo_user"></div>
+                    <div class="dropdown-content" v-if="!jwtToken && isLoggedIn === false">
+                        <router-link to="/inscription">Inscription</router-link>
+                        <router-link to="/connexion">Connexion</router-link>
+                    </div>
+                    <div class="dropdown-content" v-if="isLoggedIn">
+                        <router-link to="/compte">Mon Compte</router-link>
+                        <div class="signout"  @click="signout">Déconnexion</div>
+                    </div>
+                </div>
                 <form class="form-inline ">
                     <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
                            aria-label="Search">
@@ -47,6 +53,7 @@
 
 <script>
     import Drawer from "vue-simple-drawer"
+    import {mapGetters} from "vuex"
 
     export default {
         name: 'Header',
@@ -65,17 +72,21 @@
             toggle() {
                 this.open = !this.open
             },
+            signout() {
+                this.$store.commit("user/signOut")
+                this.$router.push("/")
+            }
         },
         computed: {
             cartNb() {
-                let list = this.$store.getters.listToCart
+                let list = this.$store.getters["shop/listToCart"]
                 let singleTotal = [];
                 list.forEach(total => {
                     singleTotal.push(total.meta_data[0].value)
                 })
-                console.log(singleTotal);
                 return singleTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-            }
+            },
+            ...mapGetters("user", ["isLoggedIn", "jwtToken"])
         },
         watch: {
             $route() {
@@ -204,9 +215,78 @@
         height: fit-content;
         font-size: 10px;
         top: 20px;
-        left: -25px;
+        left: 48px;
         background-color: #ffffff;
     }
+
+    .logo_user {
+        width: 15%;
+        height: 70%;
+        background-image: url("../assets/social.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        display: inline-block;
+        border: none;
+        padding: 16px;
+        background-color: #ffffff;
+    }
+
+
+    /*.logo_user {*/
+    /*    background-color: #4CAF50;*/
+    /*    color: white;*/
+    /*    padding: 16px;*/
+    /*    font-size: 16px;*/
+    /*    border: none;*/
+    /*}*/
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+
+    }
+
+    .dropdown-content a {
+        color: black !important;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        width: 160px;
+    }
+
+    .signout{
+        color: black !important;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        width: 160px;
+        cursor: pointer;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #F6F6F6;
+    }
+
+    .signout:hover {
+        background-color: #F6F6F6;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /*.dropdown:hover .logo_user {background-color: #3e8e41;}*/
 
     @media (min-width: 576px) {
         #vwp-logo {

@@ -87,7 +87,7 @@
         methods: {
             deleteArticle(cartArticle) {
                 // this.cartArticles.splice(this.cartArticles.indexOf(cartArticle), 1)
-                this.$store.commit('removeToCartList', cartArticle)
+                this.$store.commit('shop/removeToCartList', cartArticle)
                 // this.cart = this.$store.getters.quantityCart
                 // console.log(cartArticle);
                 // console.log(this.cartArticles.indexOf(cartArticle))
@@ -129,7 +129,7 @@
         },
         mounted() {
             this.loader = true;
-            this.cartArticles = this.$store.getters.listToCart;
+            this.cartArticles = this.$store.getters["shop/listToCart"]
             // this.singleTotal = this.$store.getters.totalList
             this.calculSingleTotal(this.cartArticles);
             this.loader = false;

@@ -1,64 +1,115 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {instance, WooCommerce} from '../components/Connection/http'
+import router from '../router/index'
 import VuexPersistence from "vuex-persist";
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-    plugins: [new VuexPersistence().plugin],
+const shop = {
+    namespaced: true,
+
     state: {
         cartList: [],
-        // totalList: []
     },
+
     getters: {
         listToCart: state => {
             return state.cartList
         },
     },
 
-    actions: {},
+    // actions: {},
 
     mutations: {
         addToCartList(state, addCart) {
             state.cartList.push(addCart)
         },
 
-        // addToCalculList(state, addCalcul) {
-        //     state.totalList.push(addCalcul)
-        // },
-
-
         removeToCartList(state, removeCart) {
             let index = state.cartList.findIndex(c => c.id == removeCart.id);
             state.cartList.splice(index, 1);
-            //     // let indexes = [], i;
-            //     // for(i = 0; i < state.cartList.length; i++)
-            //     //     if (state.cartList[i] === removeCart)
-            //     //         indexes.push(i);
-            //     // for (let j = 0; j < indexes; j++)
-            //     // {
-            //     //     state.cartList.slice(state.cartList.indexOf(j), 1)
-            //     // }
-            //
-            //     state.cartList.slice(removeCart)
-            //     console.log(state.cartList)
         },
-
-        // calculSinglePrice(state) {
-        //     this.cartArticles.forEach(price => {
-        //         if (price.sale_price === '') {
-        //             let singleprice = price.regular_price * price.meta_data[0].value
-        //             this.singleTotal.push(singleprice);
-        //             // console.log(singleprice);
-        //         } else {
-        //             let singleprice = price.sale_price * price.meta_data[0].value
-        //             this.singleTotal.push(singleprice);
-        //             // console.log(singleprice);
-        //         }
-        //         console.log(this.singleTotal);
-        //     })
-        // }
 
     },
 
-})
+};
+
+const user = {
+    namespaced: true,
+    state: {
+        data: {},
+        isLoading: false,
+        isLoggedIn: localStorage.getItem("jwtToken") ? null : false,
+        jwtToken: localStorage.getItem("jwtToken"),
+        errors: []
+    },
+    getters: {
+        isLoading: state => state.isLoading,
+        isLoggedIn: state => state.isLoggedIn,
+        errors: state => state.errors,
+        currentUser: state => state.data,
+        jwtToken: state => state.jwtToken
+    },
+    actions: {
+        async trySignin(context, credentials) {
+            try {
+                context.commit("updateIsLoading", true)
+                const response = await instance.post("/wp-json/jwt-auth/v1/token?username=" + credentials.email + "&password=" + credentials.password)
+                context.commit("signinSuccess", response.data)
+                router.push("/compte")
+            } catch (err) {
+                context.commit("signError", err)
+            }
+        },
+        async trySignup(context, user) {
+            try {
+                console.log(user)
+                context.commit("updateIsLoading", true)
+                // await instance.post("/?rest_route=/simple-jwt-login/v1/users&user_login=" + user.user_login + "&email=" + user.email + "&password=" + user.password + "&first_name=" + user.first_name + "&last_name=" + user.last_name)
+                WooCommerce.post("customers", user)
+                context.commit("signupSuccess")
+                router.push("/")
+            } catch (err) {
+                context.commit("signError", err)
+            }
+        },
+    },
+    mutations: {
+        updateIsLoading(state, isLoading) {
+          state.isLoading = isLoading
+        },
+        signupSuccess(state) {
+            state.isLoading = false
+            state.errors = []
+        },
+        signError(state, errors) {
+            console.log(errors)
+            state.isLoading = false
+            state.errors = errors.response.data
+        },
+        signinSuccess(state, data) {
+            state.isLoading = false
+            state.errors = []
+            state.isLoggedIn = true
+            state.data = data
+            state.jwtToken = data.token
+            localStorage.setItem("jwtToken", data.token)
+        },
+        signOut(state) {
+            state.jwtToken = null
+            state.data = null
+            state.isLoggedIn = false
+            localStorage.removeItem("jwtToken")
+        },
+    }
+};
+
+
+export default new Vuex.Store({
+    modules: {
+        shop,
+        user
+    },
+    plugins: [new VuexPersistence().plugin]
+},)

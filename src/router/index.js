@@ -1,16 +1,19 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import App from "../App";
-import Router from 'vue-router';
 import Main from "../components/Main";
 import Boutique from "../components/Boutique/Boutique";
+import SingleProduct from "../components/Boutique/SingleProduct";
 import Cart from "../components/Cart/Cart";
 import Paiement from "../components/Cart/Paiement";
-import Account from "../components/Account";
-import SingleProduct from "../components/Boutique/SingleProduct";
+import Signup from "../components/Connection/Signup";
+import Signin from "../components/Connection/Signin";
+import Profile from "../components/Connection/Profile";
 
-Vue.use(Router);
 
-export default new Router({
+Vue.use(VueRouter);
+
+export default new VueRouter({
     mode: 'history',
     routes: [
         {
@@ -39,10 +42,19 @@ export default new Router({
         },
         {
             path: '/compte',
-            component: Account
+            component: Profile
+        },
+        {
+            path: '/inscription',
+            component: Signup
+        },
+        {
+            path: '/connexion',
+            component: Signin
         },
     ],
     scrollBehavior() {
         return {x: 0, y: 0}
     }
 });
+
