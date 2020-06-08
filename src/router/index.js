@@ -9,6 +9,8 @@ import Paiement from "../components/Cart/Paiement";
 import Signup from "../components/Connection/Signup";
 import Signin from "../components/Connection/Signin";
 import Profile from "../components/Connection/Profile";
+import ProfileOrders from "../components/Connection/ProfileOrders";
+import ProfileAdress from "../components/Connection/ProfileAdress";
 
 
 Vue.use(VueRouter);
@@ -43,6 +45,14 @@ export default new VueRouter({
         {
             path: '/compte',
             component: Profile
+        },
+        {
+            path: '/compte/commandes',
+            component: ProfileOrders
+        },
+        {
+            path: '/compte/adresse',
+            component: ProfileAdress
         },
         {
             path: '/inscription',

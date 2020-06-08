@@ -6,12 +6,12 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <div v-if="this.$store.getters.listToCart.length === 0" class="no_article d-flex flex-column">
-                <span>Votre panier est vide</span>
-                <router-link class="is-tab nav-item article_link " to="/boutique">
-                    <button class="voir_plus_button">ALLER A LA BOUTIQUE</button>
-                </router-link>
-            </div>
+<!--            <div v-if="this.$store.getters.listToCart.length === 0" class="no_article d-flex flex-column">-->
+<!--                <span>Votre panier est vide</span>-->
+<!--                <router-link class="is-tab nav-item article_link " to="/boutique">-->
+<!--                    <button class="voir_plus_button">ALLER A LA BOUTIQUE</button>-->
+<!--                </router-link>-->
+<!--            </div>-->
             <div v-else v-for="cartArticle in cartArticles" :key="cartArticle.id" class="d-flex flex-column cart_item">
 
                 <div class="media-content d-flex flex-row">

@@ -39,6 +39,7 @@ const user = {
     namespaced: true,
     state: {
         data: {},
+        userData: [],
         isLoading: false,
         isLoggedIn: localStorage.getItem("jwtToken") ? null : false,
         jwtToken: localStorage.getItem("jwtToken"),
@@ -49,9 +50,11 @@ const user = {
         isLoggedIn: state => state.isLoggedIn,
         errors: state => state.errors,
         currentUser: state => state.data,
-        jwtToken: state => state.jwtToken
+        jwtToken: state => state.jwtToken,
+        currentUserData: state => state.userData,
     },
     actions: {
+
         async trySignin(context, credentials) {
             try {
                 context.commit("updateIsLoading", true)
@@ -76,6 +79,12 @@ const user = {
         },
     },
     mutations: {
+
+        addData(state, addUser) {
+            state.userData = addUser
+            console.log(state.userData)
+        },
+
         updateIsLoading(state, isLoading) {
           state.isLoading = isLoading
         },
@@ -100,6 +109,7 @@ const user = {
             state.jwtToken = null
             state.data = null
             state.isLoggedIn = false
+            state.userData = null
             localStorage.removeItem("jwtToken")
         },
     }

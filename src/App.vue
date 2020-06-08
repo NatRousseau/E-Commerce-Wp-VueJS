@@ -41,6 +41,10 @@
         height: 100%;
     }
 
+    .btn-default {
+        background-color: black !important;
+    }
+
     @media (min-width: 576px) {
         #app {
             margin-top: 8%;

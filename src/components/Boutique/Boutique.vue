@@ -24,9 +24,9 @@
                             </router-link>
                             <h3 class="article_title">{{popular.name}}</h3>
                             <span class="article_price"
-                                  v-if="popular.sale_price === ''">{{popular.regular_price}} €</span>
+                                  v-if="popular.sale_price === ''">{{popular.price}} €</span>
                             <span class="article_price" v-else>
-                                <span class="regular_price">{{popular.regular_price}} € </span>{{popular.sale_price}} €
+                                <span class="regular_price">{{popular.price}} € </span>{{popular.sale_price}} €
                             </span>
                         </div>
                     </div>

@@ -41,7 +41,7 @@
         methods: {
             sentArticleToCart() {
                 this.addCart = this.article
-                this.$store.commit('addToCartList', this.addCart)
+                this.$store.commit('shop/addToCartList', this.addCart)
                 this.$fire({
                     title: "Title",
                     text: "text",
