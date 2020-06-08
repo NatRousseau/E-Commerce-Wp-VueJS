@@ -41,6 +41,10 @@
         height: 100%;
     }
 
+    .credit-card-inputs.complete {
+        border: 2px solid green;
+    }
+
     .btn-default {
         background-color: black !important;
     }

@@ -16,7 +16,7 @@
 
                 <div class="media-content d-flex flex-row">
                     <div class="cart_img">
-                        <router-link class="is-tab nav-item article_link " :to="'/boutique/' + cartArticles.id">
+                        <router-link class="is-tab nav-item article_link " :to="'/boutique/' + cartArticle.id">
                             <div class="article_img"
                                  v-bind:style="{ backgroundImage: 'url(' + cartArticle.images[0].src + ')' }"></div>
                         </router-link>
@@ -103,7 +103,6 @@
             },
 
             calculSingleTotal(cartArticle) {
-               // let stock = this.cartArticles
                 cartArticle.forEach(price => {
                     if (price.sale_price === '') {
                         let quantity = price.meta_data[0].value

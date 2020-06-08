@@ -33,9 +33,11 @@
 
         mounted() {
             this.user = this.$store.getters["user/currentUser"]
+            // console.log(this.user);
             this.$woocommerce.get("customers?email=" + this.user.user_email)
                 .then((response) => {
                     this.userData = response.data
+                    console.log(this.userData);
                     this.$store.commit('user/addData', this.userData)
                 })
                 .catch((error) => {
