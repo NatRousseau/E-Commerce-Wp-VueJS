@@ -1,39 +1,26 @@
 <template>
     <footer class="d-flex justify-content-around">
-
-        <div class="d-flex flex-column">
-            <h3>MENTIONS LÉGALES</h3>
-            <div class="d-flex flex-column info">
-                <router-link class="is-tab nav-item" to="/nous-trouver">Conditions générales</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Conditions d'utilisation</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Mention légale</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Plan du site</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Lutte contre l'esclavage moderne</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Indicateur Égalité F/H</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Gestion des cookies</router-link>
-            </div>
-        </div>
-
         <div class="d-flex flex-column">
             <h3>A PROPOS</h3>
             <div class="d-flex flex-column info">
-                <router-link class="is-tab nav-item" to="/nous-trouver">Newsletter</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">FAQ</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Les autres sites Swarovsk!</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Contactez-nous</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">COVID-19</router-link>
+                <router-link class="is-tab nav-item" to="/contact">Contact</router-link>
+                <router-link class="is-tab nav-item" to="/condition-genelales">Conditions générales</router-link>
+                <router-link class="is-tab nav-item" to="/condition-utilisation">Conditions d'utilisation</router-link>
+                <router-link class="is-tab nav-item" to="/politique-et-cookies">Politique de confidentialité et cookies</router-link>
+                <router-link class="is-tab nav-item" to="/mentions-legales">Mention légale</router-link>
+                <router-link class="is-tab nav-item" to="/plan-du-site">Plan du site</router-link>
             </div>
         </div>
 
         <div class="d-flex flex-column">
-            <h3>ENTREPRISE</h3>
+            <h3>Newsletter</h3>
             <div class="d-flex flex-column info">
-                <router-link class="is-tab nav-item" to="/nous-trouver">Carrières</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Become a Partner</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Affiliation</router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Pierres fines & précieuses pour professionnels
-                </router-link>
-                <router-link class="is-tab nav-item" to="/nous-trouver">Cristaux pour professionnels</router-link>
+                <p>Abonnez-vous pour ne pas manquer nos promotions et conseils !</p>
+                <div class="d-flex flex-row">
+                    <input type="email" placeholder="Votre email">
+                    <input class="post-button" type="submit">
+                </div>
+
             </div>
         </div>
 
@@ -59,7 +46,7 @@
     a {
         font-weight: 100;
         color: white;
-        margin-left: 10px;
+        /*margin-left: 10px;*/
     }
 
     h3 {
@@ -68,6 +55,7 @@
 
     .info {
         border-left: 2px solid #ffffff;
+        padding-left: 10px;
     }
 
 

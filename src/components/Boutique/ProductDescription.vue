@@ -43,14 +43,13 @@
                 this.addCart = this.article
                 this.$store.commit('shop/addToCartList', this.addCart)
                 this.$fire({
-                    title: "Title",
-                    text: "text",
+                    title: "Succès",
+                    text: "Le produit a bien été ajouté au panier !",
                     type: "success",
                     timer: 3000
                 }).then(r => {
                     console.log(r.value);
                 });
-
             }
         }
     }

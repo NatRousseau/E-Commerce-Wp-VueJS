@@ -11,7 +11,11 @@ import Signin from "../components/Connection/Signin";
 import Profile from "../components/Connection/Profile";
 import ProfileOrders from "../components/Connection/ProfileOrders";
 import ProfileAdress from "../components/Connection/ProfileAdress";
-
+import Contact from "../components/Contact";
+import CondiGeneral from "../components/CondiGeneral";
+import CondiUtil from "../components/CondiUtil";
+import Mentions from "../components/Mentions";
+import Politique from "../components/Politique";
 
 Vue.use(VueRouter);
 
@@ -61,6 +65,26 @@ export default new VueRouter({
         {
             path: '/connexion',
             component: Signin
+        },
+        {
+            path: '/contact',
+            component: Contact
+        },
+        {
+            path: '/condition-genelales',
+            component: CondiGeneral
+        },
+        {
+            path: '/condition-utilisation',
+            component: CondiUtil
+        },
+        {
+            path: '/mentions-legales',
+            component: Mentions
+        },
+        {
+            path: '/politique-et-cookies',
+            component: Politique
         },
     ],
     scrollBehavior() {

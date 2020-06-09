@@ -11,6 +11,8 @@
                         <hr>
                         <router-link class="is-tab nav-item" to="/compte">Compte</router-link>
                         <hr>
+                        <router-link class="is-tab nav-item" to="/contact">Contact</router-link>
+                        <hr>
                         <!--                        <router-link class="is-tab nav-item" to="/nos-atouts">Recherche</router-link>-->
                         <!--                        <hr>-->
                     </div>

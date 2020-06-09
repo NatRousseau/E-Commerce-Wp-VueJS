@@ -47,94 +47,76 @@
                 <span class="shipping_info">TOTAL : </span>
                 <span class="shipping_info">{{totalProduct}} €</span>
             </div>
-        </div>
-        <div class='credit-card-inputs' :class='{ complete }'>
-            <card-number class='stripe-element card-number'
-                         ref='cardNumber'
-                         :stripe='stripe'
-                         :options='options'
-                         @change='number = $event.complete'
-            />
-            <card-expiry class='stripe-element card-expiry'
-                         ref='cardExpiry'
-                         :stripe='stripe'
-                         :options='options'
-                         @change='expiry = $event.complete'
-            />
-            <card-cvc class='stripe-element card-cvc'
-                      ref='cardCvc'
-                      :stripe='stripe'
-                      :options='options'
-                      @change='cvc = $event.complete'
-            />
+            <div>
+                <stripe-elements
+                        ref="elementsRef"
+                        :pk="publishableKey"
+                        :amount="amount"
+                        locale="fr"
+                        @token="tokenCreated"
+                        @loading="loading = $event"
+                >
+                </stripe-elements>
+                <button @click="submit">Payer {{amount / 100}}€</button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { CardNumber, CardExpiry, CardCvc } from 'vue-stripe-elements'
+    // import Stripe from "./Stripe";
+    import {StripeElements} from "vue-stripe-checkout";
 
     export default {
         name: "Paiement",
-        props: [ 'stripe', 'options' ],
         data() {
             return {
                 users: {},
                 cart: [],
                 cartArticles: [],
+                amount: null,
+                publishableKey: 'pk_test_f3XFrh6Kwk4lMDlkkuv9yeUF00V92AS3Ql',
+                token: null,
+                charge: null,
                 loader: false,
-                complete: false,
-                number: false,
-                expiry: false,
-                cvc: false
             }
         },
-
-        components: { CardNumber, CardExpiry, CardCvc },
+        components: {
+            StripeElements
+        },
 
         methods: {
-            update () {
-                this.complete = this.number && this.expiry && this.cvc
-
-                // field completed, find field to focus next
-                if (this.number) {
-                    if (!this.expiry) {
-                        this.$refs.cardExpiry.focus()
-                    } else if (!this.cvc) {
-                        this.$refs.cardCvc.focus()
-                    }
-                } else if (this.expiry) {
-                    if (!this.cvc) {
-                        this.$refs.cardCvc.focus()
-                    } else if (!this.number) {
-                        this.$refs.cardNumber.focus()
-                    }
-                }
-                // no focus magic for the CVC field as it gets complete with three
-                // numbers, but can also have four
-            },
             calculSingleTotal(cartArticle) {
-                // let stock = this.cartArticles
                 cartArticle.forEach(price => {
                     if (price.sale_price === '') {
                         let quantity = price.meta_data[0].value
                         let singleprice = price.regular_price * quantity
-                        // this.singleTotal.push(singleprice);
-                        // this.$store.commit('addToCalculList', this.singleTotal)
                         price.meta_data[2].value = singleprice
-                        // console.log(quantity);
-                        // console.log(singleprice);
                     } else {
                         let quantity = price.meta_data[0].value
                         let singleprice = price.sale_price * quantity
-                        // this.singleTotal.push(singleprice);
-                        // this.$store.commit('addToCalculList', this.singleTotal)
                         price.meta_data[2].value = singleprice
-                        // console.log(quantity);
-                        // console.log(singleprice);
                     }
-                    // console.log(this.singleTotal);
                 })
+            },
+            submit() {
+                this.$refs.elementsRef.submit();
+            },
+            tokenCreated(token) {
+                this.token = token;
+                // for additional charge objects go to https://stripe.com/docs/api/charges/object
+                this.charge = {
+                    source: token.id,
+                    amount: this.amount, // the amount you want to charge the customer in cents. $100 is 1000 (it is strongly recommended you use a product id and quantity and get calculate this on the backend to avoid people manipulating the cost)
+                    description: this.description // optional description that will show up on stripe when looking at payments
+                }
+                this.sendTokenToServer(this.charge);
+            },
+            // eslint-disable-next-line no-unused-vars
+            sendTokenToServer(charge) {
+                // Send to charge to your backend server to be processed
+                // Documentation here: https://stripe.com/docs/api/charges/create
+
             }
         },
 
@@ -143,34 +125,31 @@
             this.loader = true;
             this.cartArticles = this.$store.getters["shop/listToCart"]
             this.calculSingleTotal(this.cartArticles);
+            this.amount = this.totalProduct * 100
             this.loader = false;
-
+            console.log(this.totalProduct)
         },
+
         computed: {
             totalProduct() {
                 let singleTotal = [];
                 this.cartArticles.forEach(total => {
                     singleTotal.push(total.meta_data[2].value)
                 })
-                console.log(singleTotal);
-
                 return singleTotal.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
-
             }
         },
-
-        watch: {
-            number () { this.update() },
-            expiry () { this.update() },
-            cvc () { this.update() }
-        }
-
     }
 </script>
 
 <style scoped>
 
-
+    button {
+        background-color: black !important;
+        border: none;
+        color: #ffffff;
+        padding: 10px 20px;
+    }
 
     .paiement {
         padding-top: 20px;

@@ -41,12 +41,26 @@
         height: 100%;
     }
 
-    .credit-card-inputs.complete {
-        border: 2px solid green;
-    }
-
     .btn-default {
         background-color: black !important;
+    }
+
+    .vue-simple-drawer .close-btn .leftright, .vue-simple-drawer .close-btn .rightleft{
+        background-color: #F6F6F6 !important;
+    }
+
+    .VueCarousel-pagination[data-v-438fd353]{
+        background-color: #000000;
+    }
+
+    .VueCarousel-dot {
+        background-color: #b7b7b7 !important;
+    }
+
+    .VueCarousel-dot--active{
+        background-color: #ffffff !important;
+        /*width: 15px !important;*/
+        /*height: 15px !important;*/
     }
 
     @media (min-width: 576px) {
