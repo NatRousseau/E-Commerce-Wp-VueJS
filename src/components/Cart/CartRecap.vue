@@ -23,7 +23,9 @@
             <span class="shipping_info">{{totalProduct}} €</span>
         </div>
 
-        <router-link class="is-tab nav-item" to="/validation"><button class="procced">PROCÉDER À L'ACHAT</button></router-link>
+        <router-link class="is-tab nav-item" to="/validation">
+            <button class="procced">PROCÉDER À L'ACHAT</button>
+        </router-link>
     </div>
 </template>
 
@@ -53,10 +55,14 @@
     }
 
     .recap_list {
-        width: 510px;
+        width: 97%;
         padding-bottom: 10px;
         border-bottom: 1px solid #707070;
         margin-bottom: 10px;
+    }
+
+    .recap_item {
+        padding-left: 0;
     }
 
     .recap_title {
@@ -64,58 +70,125 @@
         text-align: left;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .recap_count {
         text-align: left;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .recap_price {
-        margin-left: 100px;
-        /*text-align: right;*/
-        /*justify-content: flex-end;*/
+        margin-left: 20px;
     }
 
     .article_price {
         width: max-content;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 16px;
+        font-size: 14px;
         text-align: right;
     }
 
     .shipping {
-        width: 510px;
+        width: 95%;
         padding-bottom: 10px;
         border-bottom: 1px solid #707070;
         margin-bottom: 10px;
     }
 
     .shipping_info {
-        width: 280px;
+        width: 100px;
         text-align: left;
-        margin-left: 40px;
     }
 
     .shipping_price {
         margin-left: 100px;
     }
 
-    /*.procced{*/
-    /*    margin-top: 10%;*/
-    /*    margin-bottom: 10%;*/
-    /*    font-family: 'Spartan';*/
-    /*    font-weight: 400;*/
-    /*    font-size: 20px;*/
-    /*    color: white;*/
-    /*    background-color: #000000;*/
-    /*    border: none;*/
-    /*    padding: 23px 135px;*/
-    /*}*/
+    .procced {
+        font-family: 'Spartan';
+        font-weight: 400;
+        font-size: 16px;
+        color: white;
+        background-color: #000000;
+        border: none;
+        padding: 10px 50px;
 
+    }
 
+    @media (min-width: 576px) {
+        .recap_item {
+            width: 550px;
+        }
+
+        .recap_price {
+            margin-left: 150px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .recap_item {
+            width: 100%;
+        }
+
+        .recap_info {
+            width: 480px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .recap_list {
+            width: 300px;
+        }
+
+        .recap_title {
+            /*font-size: 18px;*/
+        }
+
+        .recap_count {
+            /*font-size: 18px;*/
+        }
+
+        .recap_price {
+            margin-left: 20px;
+        }
+
+        .article_price {
+            /*font-size: 16px;*/
+        }
+
+        .shipping {
+            width: 300px;
+        }
+
+        .shipping_info {
+            width: 280px;
+            margin-left: 30px;
+        }
+
+        .procced {
+            width: 300px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .recap_list {
+            width: 450px;
+        }
+
+        .shipping {
+            width: 450px;
+        }
+
+        .procced {
+            width: 450px;
+        }
+    }
+
+    @media (min-width: 1600px) {
+
+    }
 </style>

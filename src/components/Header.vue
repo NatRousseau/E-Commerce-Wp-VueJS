@@ -13,8 +13,14 @@
                         <hr>
                         <router-link class="is-tab nav-item" to="/contact">Contact</router-link>
                         <hr>
-                        <!--                        <router-link class="is-tab nav-item" to="/nos-atouts">Recherche</router-link>-->
-                        <!--                        <hr>-->
+                        <div class="d-flex flex-row social">
+                            <a class="social_logo" href="https://www.facebook.com/swarovski.france/"
+                               target="_blank"><img
+                                    src="../assets/facebook.png" alt="facebook logo"></a>
+                            <a class="social_logo" href="https://www.instagram.com/swarovski/?hl=fr"
+                               target="_blank"><img
+                                    src="../assets/instagram.png" alt="instagram logo"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,13 +46,14 @@
                     </div>
                     <div class="dropdown-content" v-if="isLoggedIn">
                         <router-link to="/compte">Mon Compte</router-link>
-                        <div class="signout"  @click="signout">Déconnexion</div>
+                        <div class="signout" @click="signout">Déconnexion</div>
                     </div>
                 </div>
                 <form class="form-inline ">
                     <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+                           v-model="search"
                            aria-label="Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <i class="fas fa-search" aria-hidden="true" @click="searchItems"></i>
                 </form>
             </div>
         </div>
@@ -62,6 +69,7 @@
         data() {
             return {
                 open: false,
+                search: ''
             }
         },
         components: {
@@ -77,6 +85,11 @@
             signout() {
                 this.$store.commit("user/signOut")
                 this.$router.push("/")
+            },
+            searchItems() {
+                this.$store.commit('shop/searchItems', this.search)
+                this.$router.push("/recherche")
+                this.search = ''
             }
         },
         computed: {
@@ -104,7 +117,7 @@
         background-color: #ffffff;
         position: fixed;
         top: 0;
-        height: 10vh;
+        height: 13vh;
         z-index: 100;
         width: 100%;
     }
@@ -112,20 +125,24 @@
     .div_logo {
         text-align: center;
         line-height: 74px;
-        width: 80%;
+        width: 60%;
+    }
+
+    .logo {
+        margin-left: 80px;
     }
 
     .icon {
         text-align: center;
-        width: 20%;
+        width: 40%;
         float: right;
         margin-top: 2%;
+        flex-wrap: wrap;
     }
-
 
     a {
         color: #ffffff !important;
-        width: 15%;
+        width: 35%;
     }
 
     a:hover {
@@ -135,13 +152,17 @@
 
     .menu-button {
         position: inherit;
-        left: 20px;
+        left: -18px;
         top: 25px;
         color: white;
     }
 
     .menu-button span {
         display: none;
+    }
+
+    .menu-button img {
+        width: 30%;
     }
 
     .menu {
@@ -157,6 +178,20 @@
         width: 60%;
         margin-bottom: 30px;
         text-align: center;
+    }
+
+    .social {
+        position: absolute;
+        bottom: 20px;
+        left: 70px;
+    }
+
+    .social_logo {
+        width: 30%;
+    }
+
+    .social_logo img {
+        width: 50%;
     }
 
     .nav-item {
@@ -176,7 +211,7 @@
     }
 
     #shopping_bag {
-        width: 60%;
+        width: 32px;
     }
 
     #user {
@@ -187,9 +222,6 @@
         color: #212121;
     }
 
-    .menu-button img {
-        width: 40%;
-    }
 
     ::-webkit-scrollbar {
         display: none;
@@ -217,7 +249,7 @@
         height: fit-content;
         font-size: 10px;
         top: 20px;
-        left: 48px;
+        left: 11vw;
         background-color: #ffffff;
     }
 
@@ -234,15 +266,6 @@
         background-color: #ffffff;
     }
 
-
-    /*.logo_user {*/
-    /*    background-color: #4CAF50;*/
-    /*    color: white;*/
-    /*    padding: 16px;*/
-    /*    font-size: 16px;*/
-    /*    border: none;*/
-    /*}*/
-
     .dropdown {
         position: relative;
         display: inline-block;
@@ -256,7 +279,7 @@
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
-
+        right: 0;
     }
 
     .dropdown-content a {
@@ -267,7 +290,7 @@
         width: 160px;
     }
 
-    .signout{
+    .signout {
         color: black !important;
         padding: 12px 16px;
         text-decoration: none;
@@ -288,8 +311,6 @@
         display: block;
     }
 
-    /*.dropdown:hover .logo_user {background-color: #3e8e41;}*/
-
     @media (min-width: 576px) {
         #vwp-logo {
             width: 19%;
@@ -299,35 +320,35 @@
             line-height: 85px;
         }
 
-        /*.title-menu {*/
-        /*    width: 57vw;*/
-        /*}*/
+        .menu-button {
+            top: 40px;
+        }
     }
 
     @media (min-width: 768px) {
         .div_logo {
             line-height: 85px;
+            width: 100%;
         }
 
         #vwp-logo {
             width: 15%;
         }
 
-        /*.menu-button {*/
-        /*    top: 28px;*/
-        /*}*/
-        /*.menu-column {*/
-        /*    margin-top: 30px;*/
-        /*    width: 40%;*/
-        /*}*/
-        /*.title-menu {*/
-        /*    width: 38vw;*/
-        /*}*/
+        .count_cart {
+            top: 20px;
+            left: 8vw;
+        }
     }
 
     @media (min-width: 992px) {
+        .header {
+            height: 11vh;
+        }
+
         .menu-button {
-            top: 15px;
+            top: 30px;
+            left: -8px;
         }
 
         .menu-button span {
@@ -336,13 +357,20 @@
             font-size: 12px;
         }
 
-        /*.menu-column {*/
-        /*    width: 20%;*/
-        /*}*/
-        /*.title-menu {*/
-        /*    width: 14vw;*/
-        /*    margin-left: 3vw;*/
-        /*}*/
+        .icon {
+            width: 50%;
+            flex-wrap: nowrap;
+        }
+
+        .count_cart {
+            top: 20px;
+            left: 7vw;
+        }
+
+        .logo{
+            margin-left: 340px;
+        }
+
         #vwp-logo {
             width: 13%;
         }
@@ -350,17 +378,22 @@
 
     @media (min-width: 1200px) {
         .menu-button {
-            top: 10px;
+            top: 30px;
+        }
+
+        a{
+            width: 20%;
+        }
+
+        .count_cart {
+            top: 20px;
+            left: 5vw;
         }
 
         .menu-button span {
             font-size: 1rem;
         }
 
-        /*.title-menu {*/
-        /*    width: 14vw;*/
-        /*    margin-left: 3vw;*/
-        /*}*/
         #vwp-logo {
             width: 10%;
         }
@@ -373,6 +406,19 @@
 
         .menu-button span {
             font-size: 1rem;
+        }
+
+        .logo{
+            margin-left: 0;
+        }
+
+        .icon{
+            width: 30%;
+        }
+
+        .count_cart {
+            top: 20px;
+            left: 3.5vw;
         }
 
         #vwp-logo {

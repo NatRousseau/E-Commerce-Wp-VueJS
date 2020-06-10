@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from "../App";
 import Main from "../components/Main";
+import Search from "../components/Boutique/Search";
 import Boutique from "../components/Boutique/Boutique";
 import SingleProduct from "../components/Boutique/SingleProduct";
 import Cart from "../components/Cart/Cart";
@@ -29,6 +30,10 @@ export default new VueRouter({
         {
             path: '/',
             component: Main
+        },
+        {
+            path: '/recherche',
+            component: Search
         },
         {
             path: '/boutique',

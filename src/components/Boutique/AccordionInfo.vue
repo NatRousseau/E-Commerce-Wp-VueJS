@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-row">
+    <div class="d-flex description_general">
         <mdb-accordion class="accordeon" :panes="panes"/>
         <div class="description">
             <h3>DESCRIPTION</h3>
@@ -73,14 +73,18 @@
 
 <style>
 
+    .description_general{
+        flex-direction: column;
+    }
+
     .accordeon {
-        margin: 50px;
+        margin: 10px;
         font-family: Spartan;
-        font-size: 25px;
+        font-size: 14px;
         font-weight: 300;
         color: #000000;
         text-align: left;
-        width: 60%;
+        width: 90%;
     }
 
     .card {
@@ -97,11 +101,11 @@
 
     .accordeon > div > div > h5::after {
         position: relative;
-        top: 12px;
+        top: 20px;
         content: '+';
         float: right;
         font-family: Spartan;
-        font-size: 35px;
+        font-size: 18px;
         font-weight: 500;
         color: #707070;
         line-height: 100%;
@@ -109,15 +113,73 @@
 
     .accordeon > div > div > p {
         font-family: Spartan;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 300;
         color: #000000;
     }
 
     .description {
-        width: 40%;
+        width: 90%;
         text-align: left;
-        margin: 50px 0px;
+        margin: 25px 10px;
+    }
+
+    p{
+        font-size: 14px;
+    }
+
+    li{
+        font-size: 14px;
+    }
+
+    @media (min-width: 576px) {
+
+
+    }
+
+    @media (min-width: 768px) {
+        .accordeon {
+            margin: 10px 40px;
+        }
+
+        .description {
+            width: 90%;
+            text-align: left;
+            margin: 25px 40px;
+        }
+
+    }
+
+    @media (min-width: 992px) {
+
+        .description_general{
+            flex-direction: row;
+        }
+        .accordeon {
+            margin: 20px;
+            font-family: Spartan;
+            font-size: 25px;
+            font-weight: 300;
+            color: #000000;
+            text-align: left;
+            width: 60%;
+        }
+        .description {
+            width: 40%;
+            text-align: left;
+            margin: 50px 0px;
+        }
+
+    }
+
+    @media (min-width: 1200px) {
+
+
+    }
+
+    @media (min-width: 1600px) {
+
+
     }
 
 </style>

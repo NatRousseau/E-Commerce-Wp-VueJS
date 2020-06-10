@@ -1,5 +1,5 @@
 <template>
-    <div class="paiement d-flex flex-row">
+    <div class="paiement d-flex">
         <div class="info d-flex flex-column" v-for="user in users" :key="user.id">
             <div class="billing_adress d-flex flex-column">
                 <h2>Adresse de facturation</h2>
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-    // import Stripe from "./Stripe";
     import {StripeElements} from "vue-stripe-checkout";
 
     export default {
@@ -154,43 +153,49 @@
     .paiement {
         padding-top: 20px;
         padding-bottom: 30px;
+        flex-direction: column;
     }
 
     .recap {
         background-color: #F6F6F6;
-        margin-top: 150px;
+        margin: 20px;
         padding: 30px;
         height: max-content;
+        width: 90%;
     }
 
     .recap_info {
-        width: 280px;
+        width: 150px;
     }
 
     .recap_list {
-        width: 510px;
+        width: 280px;
         padding-bottom: 10px;
         border-bottom: 1px solid #707070;
         margin-bottom: 10px;
     }
 
+    .recap_item{
+        padding: 0;
+    }
+
     .recap_title {
-        width: max-content;
         text-align: left;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 18px;
+        font-size: 16px;
+        width: 200px;
     }
 
     .recap_count {
         text-align: left;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .recap_price {
-        margin-left: 100px;
+        margin-left: 80px;
         /*text-align: right;*/
         /*justify-content: flex-end;*/
     }
@@ -199,40 +204,153 @@
         width: max-content;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 16px;
+        font-size: 14px;
         text-align: right;
     }
 
     .shipping {
-        width: 510px;
+        width: 280px;
         padding-bottom: 10px;
         border-bottom: 1px solid #707070;
         margin-bottom: 10px;
     }
 
     .shipping_info {
-        width: 280px;
+        width: 150px;
         text-align: left;
-        margin-left: 40px;
+        /*margin-left: 40px;*/
     }
 
     .shipping_price {
-        margin-left: 100px;
+        margin-left: 50px;
     }
 
     .info {
-        margin-left: 20%;
-        width: 40%;
-    }
-
-    .billing_adress {
-
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
     }
 
     input {
         background-color: #F6F6F6;
         margin: 10px;
         border: 1px solid #707070;
+    }
+
+    @media (min-width: 576px) {
+        .recap_list {
+            width: 475px;
+        }
+
+        .recap_info{
+            width: 340px;
+        }
+
+        .recap_title{
+            width: 250px;
+        }
+
+        .shipping {
+            width: 475px;
+        }
+
+        .shipping_price {
+            margin-left: 250px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .recap {
+            background-color: #F6F6F6;
+            margin: 20px 10%;
+            padding: 30px;
+            height: max-content;
+            width: 80%;
+        }
+
+        .recap_list {
+            width: 605px;
+        }
+
+        .recap_info{
+            width: 470px;
+        }
+
+        .shipping {
+            width: 605px;
+        }
+
+        .shipping_price {
+            margin-left: 380px;
+        }
+
+        .info {
+            margin-left: 20%;
+            margin-right: 20%;
+            width: 60%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .paiement {
+            flex-direction: row;
+        }
+
+        .recap {
+            background-color: #F6F6F6;
+            margin: 20px;
+            padding: 30px;
+            height: max-content;
+            width: 60%;
+        }
+
+        .recap_list {
+            width: 420px;
+        }
+
+        .recap_info{
+            width: 280px;
+        }
+
+        .shipping {
+            width: 420px;
+        }
+
+        .shipping_price {
+            margin-left: 100px;
+        }
+
+        .info {
+            margin-left: 10%;
+            margin-right: 10%;
+            width: 40%;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .recap {
+            background-color: #F6F6F6;
+            margin: 20px;
+            padding: 30px;
+            height: max-content;
+            width: 35%;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .recap {
+            background-color: #F6F6F6;
+            margin: 20px;
+            padding: 30px;
+            height: max-content;
+            width: 25%;
+        }
+
+        .info {
+            margin-left: 15%;
+            margin-right: 15%;
+            width: 30%;
+        }
     }
 
 </style>

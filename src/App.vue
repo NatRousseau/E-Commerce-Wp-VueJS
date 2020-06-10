@@ -25,31 +25,30 @@
 
 <style>
     #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
+        font-family: 'Spartan';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
-        color: #2c3e50;
-        margin-top: 10%;
+        margin-top: 23%;
         width: 100%;
     }
 
     .vue-simple-drawer {
         backdrop-filter: blur(10px);
         background: #1C1C1C !important;
-        width: 15%;
+        width: 50%;
         height: 100%;
     }
 
-    .btn-default {
-        background-color: black !important;
+    .VueCarousel-dot-container {
+        margin: 0 !important;
     }
 
-    .vue-simple-drawer .close-btn .leftright, .vue-simple-drawer .close-btn .rightleft{
+    .vue-simple-drawer .close-btn .leftright, .vue-simple-drawer .close-btn .rightleft {
         background-color: #F6F6F6 !important;
     }
 
-    .VueCarousel-pagination[data-v-438fd353]{
+    .VueCarousel-pagination[data-v-438fd353] {
         background-color: #000000;
     }
 
@@ -57,7 +56,7 @@
         background-color: #b7b7b7 !important;
     }
 
-    .VueCarousel-dot--active{
+    .VueCarousel-dot--active {
         background-color: #ffffff !important;
         /*width: 15px !important;*/
         /*height: 15px !important;*/
@@ -65,28 +64,32 @@
 
     @media (min-width: 576px) {
         #app {
-            margin-top: 8%;
+            margin-top: 19%;
         }
 
     }
 
     @media (min-width: 768px) {
         #app {
-            margin-top: 7%;
+            margin-top: 14%;
         }
 
     }
 
     @media (min-width: 992px) {
         #app {
-            margin-top: 6%;
+            margin-top: 9%;
+        }
+
+        .vue-simple-drawer {
+            width: 30%;
         }
 
     }
 
     @media (min-width: 1200px) {
         #app {
-            margin-top: 5%;
+            margin-top: 7%;
         }
 
     }

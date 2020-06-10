@@ -25,11 +25,11 @@
 <style scoped>
 
     .related_product {
-        margin: 50px;
+        margin: 10px;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-auto-rows: auto;
-        grid-column-gap: 20px;
+        grid-column-gap: 10px;
     }
 
     .related_img {
@@ -37,8 +37,8 @@
         background-repeat: no-repeat;
         background-position: center;
         cursor: pointer;
-        width: 300px;
-        height: 340px;
+        width: 100%;
+        height: 100px;
         background-color: #FAFAFA;
     }
 
@@ -50,14 +50,70 @@
         margin-top: 10px;
         font-family: 'Spartan';
         font-weight: bold;
-        font-size: 16px;
+        font-size: 14px;
         text-align: left;
     }
 
     .related_price {
         font-family: 'Spartan';
-        font-size: 18px;
+        font-size: 14px;
         text-align: left;
+    }
+
+    @media (min-width: 576px) {
+
+    }
+
+    @media (min-width: 768px) {
+        .related_product {
+            margin: 10px 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: auto;
+            grid-column-gap: 10px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .related_product {
+            margin: 10px 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: auto;
+            grid-column-gap: 20px;
+        }
+
+        .related_img {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            width: 100%;
+            height: 150px;
+            background-color: #FAFAFA;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .related_product {
+            margin: 10px 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: auto;
+            grid-column-gap: 50px;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .related_img {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+            width: 100%;
+            height: 250px;
+            background-color: #FAFAFA;
+        }
     }
 
 </style>

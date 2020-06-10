@@ -11,12 +11,17 @@ const shop = {
 
     state: {
         cartList: [],
+        search: '',
     },
 
     getters: {
         listToCart: state => {
             return state.cartList
         },
+
+        getSearchItem: state => {
+            return state.search
+        }
     },
 
     // actions: {},
@@ -30,6 +35,9 @@ const shop = {
             let index = state.cartList.findIndex(c => c.id == removeCart.id);
             state.cartList.splice(index, 1);
         },
+        searchItems(state, addSearch) {
+            state.search = addSearch
+        }
 
     },
 

@@ -10,8 +10,8 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <div class="media-content d-flex flex-row">
-                <ProductGalerie :galerieImg="galerieImg" @get-id="selectionImage"></ProductGalerie>
+            <div class="media-content d-flex">
+                <ProductGalerie class="ProductGalerie" :galerieImg="galerieImg" @get-id="selectionImage"></ProductGalerie>
                 <div class="article_img" v-bind:style="{ backgroundImage: 'url(' + image + ')' }">
                 </div>
                 <ProductDescription :article="article" :materialOptions="materialOptions"
@@ -160,14 +160,14 @@
         margin-left: 20px;
         margin-right: 10px;
         font-family: Spartan;
-        font-size: 25px;
+        font-size: 18px;
         font-weight: 300;
         color: #000000;
     }
 
     .article_select::before {
         content: '>';
-        margin-right: 20px;
+        margin-right: 10px;
     }
 
     .article_select {
@@ -175,22 +175,34 @@
     }
 
     .loader {
-        margin-top: 390px;
-        margin-bottom: 390px;
+        margin-top: 150px;
+        margin-bottom: 150px;
+    }
+
+    .media-content{
+        flex-direction: column;
+    }
+
+    .ProductGalerie{
+        position: relative;
+        top: 300px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .article_single {
-        margin-top: 80px;
+        margin-top: 40px;
     }
 
     .article_img {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        width: 663px;
-        height: 600px;
-        margin-right: 50px;
-        margin-left: 50px;
+        width: 70%;
+        height: 300px;
+        margin-right: 60px;
+        margin-left: 60px;
+        margin-top: -140px;
         background-color: #FAFAFA;
     }
 
@@ -204,6 +216,83 @@
 
     .related_txt {
         text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    @media (min-width: 576px) {
+        .article_img {
+            width: 70%;
+            height: 300px;
+            margin-right: 90px;
+            margin-left: 90px;
+            margin-top: -80px;
+            background-color: #FAFAFA;
+        }
+
+        .ProductGalerie{
+            margin-left: 80px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .article_img {
+            width: 40%;
+            height: 300px;
+            margin-right: 230px;
+            margin-left: 230px;
+            margin-top: -80px;
+            background-color: #FAFAFA;
+        }
+
+        .ProductGalerie{
+            margin-left: 188px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .media-content{
+            flex-direction: row;
+        }
+
+        .ProductGalerie{
+            position: initial;
+            flex-direction: column;
+            flex-wrap: wrap;
+            margin-left: 60px;
+        }
+
+        .article_img {
+            width: 100%;
+            height: 400px;
+            margin-right: 80px;
+            margin-left: 80px;
+            margin-top: 0px;
+            background-color: #FAFAFA;
+        }
+
+    }
+
+    @media (min-width: 1200px) {
+        .category {
+            margin-top: 100px;
+        }
+
+    }
+
+    @media (min-width: 1600px) {
+
+        .category {
+            margin-top: 110px;
+        }
+        .article_img {
+            width: 600px;
+            height: 400px;
+            margin-right: 300px;
+            margin-left: 300px;
+            margin-top: 0px;
+            background-color: #FAFAFA;
+        }
+
     }
 
 </style>

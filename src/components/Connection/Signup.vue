@@ -3,23 +3,23 @@
         <h1>Signup</h1>
         <form @submit="trySubmit" class="text-left">
             <div class="form-group">
-                <label>User_login</label>
+                <label>Votre Pseudo</label>
                 <input class="form-control" v-model="form.user_login" type="text">
             </div>
             <div class="form-group">
-                <label>email</label>
+                <label>Votre email</label>
                 <input class="form-control" v-model="form.email" type="text">
             </div>
             <div class="form-group">
-                <label>firstname</label>
+                <label>Votre prenom</label>
                 <input class="form-control" v-model="form.first_name" type="text">
             </div>
             <div class="form-group">
-                <label>lastname</label>
+                <label>Votre nom</label>
                 <input class="form-control" v-model="form.last_name" type="text">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label>Mot de passe</label>
                 <input class="form-control" v-model="form.password" type="password">
             </div>
 
@@ -43,30 +43,6 @@
                     password: "",
                     first_name: "",
                     last_name: "",
-                    billing: {
-                        first_name: "",
-                        last_name: "",
-                        company: "",
-                        address_1: "",
-                        address_2: "",
-                        city: "",
-                        state: "",
-                        postcode: "",
-                        country: "",
-                        email: "",
-                        phone: ""
-                    },
-                    shipping: {
-                        first_name: "",
-                        last_name: "",
-                        company: "",
-                        address_1: "",
-                        address_2: "",
-                        city: "",
-                        state: "",
-                        postcode: "",
-                        country: ""
-                    }
                 }
             };
         },

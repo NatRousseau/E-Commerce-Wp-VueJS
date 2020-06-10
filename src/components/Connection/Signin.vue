@@ -7,7 +7,7 @@
                 <input class="form-control" v-model="form.email" type="text">
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label>Mot de passe</label>
                 <input class="form-control" v-model="form.password" type="password">
             </div>
             <ul v-if="errors.length">

@@ -57,35 +57,34 @@
 
 <style scoped>
     .info_article {
-        margin-right: 50px;
-        margin-left: 50px;
-        width: 500px;
-        height: 623px;
+        margin: 150px 20px;
+        width: 90%;
+        height: 400px;
         background-color: #F6F6F6;
         text-align: left;
     }
 
     .article_title {
-        margin-top: 20px;
+        margin-top: 10px;
         font-family: 'Spartan';
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
         width: 100%;
     }
 
     .article_material {
-        margin-top: 20px;
+        margin-top: 10px;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .article_stone {
-        margin-top: 20px;
-        margin-left: 10px;
+        margin-top:10px;
+        margin-left: 5px;
         font-family: 'Spartan';
         font-weight: 500;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .regular_price {
@@ -96,7 +95,7 @@
 
     .article_price {
         font-family: 'Spartan';
-        font-size: 20px;
+        font-size: 16px;
         text-align: left;
     }
 
@@ -105,11 +104,11 @@
         margin-bottom: 10%;
         font-family: 'Spartan';
         font-weight: 400;
-        font-size: 20px;
+        font-size: 12px;
         color: white;
         background-color: #000000;
         border: none;
-        padding: 23px 135px;
+        padding: 10px 10px;
     }
 
     .info_plus {
@@ -126,38 +125,79 @@
 
     .quantity {
         width: fit-content;
-        height: 70px;
+        height: 30px;
         background-color: #F6F6F6;
         border: 1px solid #707070;
-        margin: 30px;
+        margin: 10px;
         font-family: 'Spartan';
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .lessButton {
         border: none;
-        height: 68px;
-        width: 50px;
+        height: 24px;
+        width: 25px;
         background-color: #F6F6F6;
         font-family: 'Spartan';
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .count {
-        height: 68px;
-        margin: 0 30px;
+        height: 34px;
+        margin: 0 15px;
     }
 
     .moreButton {
         border: none;
-        height: 68px;
-        width: 50px;
+        height: 24px;
+        width: 25px;
         background-color: #F6F6F6;
         font-family: 'Spartan';
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
+    }
+
+    @media (min-width: 576px) {
+
+    }
+
+    @media (min-width: 768px) {
+        .info_article {
+            margin: 100px 40px;
+        }
+        .add_cart {
+            margin-top: 5%;
+            margin-bottom: 5%;
+            font-family: 'Spartan';
+            font-weight: 400;
+            font-size: 12px;
+            color: white;
+            background-color: #000000;
+            border: none;
+            padding: 10px 10px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .info_article {
+            margin-right: 50px;
+            margin-left: 0px;
+            margin-top: 0;
+            width: 800px;
+            height: 400px;
+            background-color: #F6F6F6;
+            text-align: left;
+        }
+    }
+
+    @media (min-width: 1200px) {
+
+    }
+
+    @media (min-width: 1600px) {
+
     }
 
 </style>
